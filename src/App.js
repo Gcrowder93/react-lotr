@@ -42,7 +42,13 @@ function App() {
       },
     });
     const data = await resp.json();
-    const characterData = data.map((item) => [item.date, item.dates]);
+    // const characterData = data.map((item) => [item.date, item.dates]);
+    const characterData = data.map((item) => ({
+      name: item.name,
+      birth: item.birth, //thanks to michelle!
+      death: item.death,
+      dates: item.birth === item.death ? 'Unknown' : `${item.birth} - ${item.death}`,
+    }));
 
     setCharacters(characterData);
     return [CharacterList];
